@@ -14,24 +14,24 @@ timer = init_fish_count_per_timer(initial_state)
 fish_reset = 0
 fish_new = 0
 
-j = 0
-while (j < 256) :
-	i = 0
-	while (i < len(timer)) :
-		if (timer[i] > 0) :
-			if (i == 0) :
-				fish_reset = timer[i]
-				fish_new = timer[i]
+i = 0
+while (i < 256) :
+	j = 0
+	while (j < len(timer)) :
+		if (timer[j] > 0) :
+			if (j == 0) :
+				fish_reset = timer[j]
+				fish_new = timer[j]
 			else :
-				timer[i-1] = timer[i-1] + timer[i]
-			timer[i] = 0
-		i += 1
+				timer[j-1] = timer[j]
+			timer[j] = 0
+		j += 1
 	if (fish_reset > 0) :
 		timer[6] += fish_reset
 		fish_reset = 0
 	if (fish_new != 0) :
 		timer[8] += fish_new
 		fish_new = 0
-	j += 1
+	i += 1
 
 print(sum(timer))
