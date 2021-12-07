@@ -34,40 +34,19 @@ def check_vertical(diagram, x1, y1, y2) :
 			diagram[y1][x1] += 1
 			y1 -= 1
 
-def go_up(diagram, x1, y1, x2, steps) :
-	if (x1 > x2) : # go left
-		while (steps >= 0) :
-			diagram[y1][x1] += 1
-			y1 = y1 - 1
-			x1 = x1 - 1
-			steps = steps - 1
-	else : # go right
-		while (steps >= 0) :
-			diagram[y1][x1] += 1
-			y1 = y1 - 1
-			x1 = x1 + 1
-			steps = steps - 1
-
-def go_down(diagram, x1, y1, x2, steps) :
-	if (x1 < x2) : # go right
-		while (steps >= 0) : 
-			diagram[y1][x1] += 1
-			y1 = y1 + 1
-			x1 = x1 + 1
-			steps = steps - 1
-	else : # go left
-		while (steps >= 0) :
-			diagram[y1][x1] += 1
-			y1 = y1 + 1
-			x1 = x1 - 1
-			steps = steps - 1
-
 def check_diagonal(diagram, x1, y1, x2, y2) :
 	steps = abs(x1 - x2)
-	if (y1 > y2) :
-		go_up(diagram, x1, y1, x2, steps)
-	else :
-		go_down(diagram, x1, y1, x2, steps)
+	while (steps >= 0):
+		diagram[y1][x1] += 1
+		if x1 >= x2:
+			x1 = x1 - 1
+		else:
+			x1 = x1 + 1
+		if y1 >= y2:
+			y1 = y1 - 1
+		else:
+			y1 = y1 + 1
+		steps -= 1
 
 def check_overlap(diagram) :
 	count = 0
