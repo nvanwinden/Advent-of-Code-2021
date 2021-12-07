@@ -11,27 +11,21 @@ f.close
 initial_state = data.split(',')
 timer = init_fish_count_per_timer(initial_state)
 
-fish_reset = 0
-fish_new = 0
-
 i = 0
 while (i < 256) :
 	j = 0
+	new_fish = 0
 	while (j < len(timer)) :
 		if (timer[j] > 0) :
 			if (j == 0) :
-				fish_reset = timer[j]
-				fish_new = timer[j]
+				new_fish = timer[j]
 			else :
 				timer[j-1] = timer[j]
 			timer[j] = 0
 		j += 1
-	if (fish_reset > 0) :
-		timer[6] += fish_reset
-		fish_reset = 0
-	if (fish_new != 0) :
-		timer[8] += fish_new
-		fish_new = 0
+	if (new_fish > 0) :
+		timer[6] += new_fish
+		timer[8] += new_fish
 	i += 1
 
 print(sum(timer))
