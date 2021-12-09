@@ -1,3 +1,24 @@
+class card :
+	check_rows = []
+	check_cols = []
+	won = 0
+
+def sum_card(card, drawn_numbers) :
+	return (0)
+
+def check_bingo(num, i, rows, cols) :
+	if num in rows[i] :
+		card.check_rows[i].append('x')
+	if (len(card.check_rows[i]) == 5) :
+		card.won = int((i + 1) / 3)
+		print(card.won)
+		return (1)
+	if num in cols[i] :
+		card.check_cols[i].append('x')
+	if (len(card.check_cols[i]) == 5) :
+		card.won = int((i + 1) / 3)
+		return (1)
+
 def get_rows(board) :
 	for row in board :
 		rows.append(row.split())
@@ -35,5 +56,21 @@ for board in board_split :
 	get_rows(board)
 	get_cols(board)
 
-print('rows =', rows)
-print('cols =', cols)
+i = 0
+while (i < len(cols)) :
+	card.check_rows.append([])
+	card.check_cols.append([])
+	i += 1
+
+for num in drawn_numbers :
+	bingo = 0
+	i = 0
+	while (i < len(cols)) :
+		if (check_bingo(num, i, rows, cols)) :
+			bingo = 1
+			break
+		i += 1
+	if (bingo == 1) :
+		break
+
+sum_card(board_split[card.won - 1], drawn_numbers)
