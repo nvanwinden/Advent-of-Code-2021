@@ -4,6 +4,14 @@ class card :
 	won = 0
 
 def sum_card(card, drawn_numbers) :
+	sum_card = 0
+	for row in card :
+		row_split = row.split()
+		num_list = [int(i) for i in row_split]
+		for num in num_list :
+			if (num not in drawn_numbers) :
+				sum_card = sum_card + num 
+	print(sum_card)
 	return (0)
 
 def check_bingo(num, i, rows, cols) :
