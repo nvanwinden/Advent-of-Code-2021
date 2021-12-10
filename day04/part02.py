@@ -5,6 +5,7 @@ class card :
 	nums_checked = []
 	last_called = 0
 	won = 0
+	boards_won = []
 
 def sum_card(card_won, drawn_numbers) :
 	sum_card = 0
@@ -24,11 +25,16 @@ def check_bingo(num, i, rows, cols) :
 	if num in cols[i] :
 		card.check_cols[i].append('x')
 	if (len(card.check_rows[i]) == 5 or len(card.check_cols[i]) == 5) :
+		card.won = 0
 		while (j < i + 1) :
 			j += 5
 			card.won += 1
+		if (card.won not in card.boards_won) :
+			if (len(card.boards_won) == card.board_count - 1) :
+				return (1)
+			card.boards_won.append(card.won)
 		card.last_called = num
-		return (1)
+		return (0)
 
 def get_rows(board) :
 	for row in board :
@@ -74,14 +80,14 @@ while (i < len(cols)) :
 	i += 1
 
 for num in drawn_numbers :
-	bingo = 0
+	last_to_win = 0
 	i = 0
 	while (i < len(cols)) :
 		if (check_bingo(num, i, rows, cols)) :
-			bingo = 1
+			last_to_win = 1
 			break
 		i += 1
-	if (bingo == 1) :
+	if (last_to_win == 1) :
 		break
 
 print(sum_card(board_split[card.won - 1], drawn_numbers))
